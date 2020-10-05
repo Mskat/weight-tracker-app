@@ -57,8 +57,10 @@ public class WeightTrackerLauncher {
         try (BufferedWriter bfw = new BufferedWriter(new FileWriter(filePath, true))) {
             bfw.write(user.toString());
             bfw.write(System.getProperty("line.separator"));
-        } catch (NullPointerException npe) {
-            System.out.println("Something is wrong!");
+        } catch (NullPointerException | FileNotFoundException npe) {
+            System.out.println("Something is wrong!\n" +
+                    "Saving the file is not complete. Check the \"path\".");
+            showMenu();
         }
         System.out.println("Your weight has been saved in a file called " + filename + ", press ENTER to continue.");
         sc.nextLine();
